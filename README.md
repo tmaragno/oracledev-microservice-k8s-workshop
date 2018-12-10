@@ -30,22 +30,22 @@ En esta sección, creará una aplicación Wercker de una aplicación GitHub.
 
 1. Inicie sesión en su cuenta de GitHub. Abra la aplicación * [Helidon Microservice] (https://github.com/pasimoes/helidon-quickstart-se) * en Github y haga clic en ** Fork **.
 
-! [Horquilla del proyecto Helidon QuickStart SE] (recursos / imágenes / helidon-quickstart-se-fork.png)
+! [Fork del proyecto Helidon QuickStart SE] (resources/images/helidon-quickstart-se-fork.png)
 
 2. Ajuste el nombre de la aplicación en los siguientes archivos:
 
     Donde `` `quickstart-se``` incluye tu número de participante, por ejemplo` `` quickstart-se01```
     - kubernetes_deployment.yml.template
     
-    ! [Ajustar en la plantilla de implementación de K8s] (resources / images / kubernetes-deployment-yml-template-adjust.png)
+    ! [Ajustar en la plantilla de implementación de K8s] (resources/images/kubernetes-deployment-yml-template-adjust.png)
     
     - kubernetes_service.yml.template
 
-    ! [Ajustar en la plantilla de servicio de K8s] (resources / images / kubernetes-service-yml-template-adjust.png)
+    ! [Ajustar en la plantilla de servicio de K8s] (resources/images/kubernetes-service-yml-template-adjust.png)
 
     - wercker.yml
     
-    ! [Ajustar en Wercker yml] (resources / images / wercker-yml-adjust.png)
+    ! [Ajustar en Wercker yml] (resources/images/wercker-yml-adjust.png)
     
 3. Seleccione el archivo * wercker.yml * para abrirlo.
 
@@ -59,27 +59,27 @@ En esta sección, creará una aplicación Wercker de una aplicación GitHub.
 
 4. Abra e inicie sesión en su cuenta de Wercker. Haga clic en la opción `` `+` `` y elija ** Agregar aplicación **.
 
-! [Wercker Add Application] (recursos / imágenes / wercker-add-app.png)
+! [Wercker Add Application] (resources/images/wercker-add-app.png)
 
 5. Asegúrese de que su usuario esté seleccionado para el # 1 y GitHub esté seleccionado para el # 2 y haga clic en ** Siguiente **.
 
-! [Wercker Create New Application Step 1] (recursos / imágenes / wercker-createapp-step1.png)
+! [Wercker Create New Application Step 1] (resources/images/wercker-createapp-step1.png)
 
 6. Seleccione la aplicación `` `helidon-quickstart-se``` que bifurque previamente y haga clic en ** Siguiente **.
 
-! [Wercker Create New Application Step 2] (recursos / imágenes / wercker-createapp-step2.png)
+! [Wercker Create New Application Step 2] (resources/images/wercker-createapp-step2.png)
 
 7. Acepte el valor predeterminado para verificar el código y haga clic en ** Siguiente **.
 
-! [Wercker Create New Application Step 3] (recursos / imágenes / wercker-createapp-step3.png)
+! [Wercker Create New Application Step 3] (resources/images/wercker-createapp-step3.png)
 
 8. Haga clic en ** Crear **.
 
-! [Wercker Create New Application Step 4] (recursos / imágenes / wercker-createapp-step4.png)
+! [Wercker Create New Application Step 4] (resources/images/wercker-createapp-step4.png)
 
 9. Su aplicación fue creada exitosamente. En la siguiente sección, se definen las variables de entorno. Haga clic en la pestaña ** Entorno **.
 
-! [Wercker define las variables de entorno] (resources / images / wercker-env-01.png)
+! [Wercker define las variables de entorno] (resources/images/wercker-env-01.png)
 
 ## Establecer variables de entorno de aplicación
 
@@ -91,17 +91,17 @@ En esta sección, creará una aplicación Wercker de una aplicación GitHub.
     - Dirección de Registro OCI
     Cuando haya terminado, haga clic en la pestaña ** Ejecutar **.
 
-! [Wercker define las variables de entorno] (resources / images / wercker-env-02.png)
+! [Wercker define las variables de entorno] (resources/images/wercker-env-02.png)
 
 2. Pruebe que la aplicación se puede compilar y enviar a OCIR. Navegue a la pestaña ** Ejecuciones ** y haga clic en ** para activar un enlace de compilación ahora ** en la parte inferior de la página.
 
-! [Wercker Run 01] (recursos / imágenes / wercker-runs-01.png)
+! [Wercker Run 01] (resources/images/wercker-runs-01.png)
 
-! [Wercker Run 02] (recursos / imágenes / wercker-runs-02.png)
+! [Wercker Run 02] (resources/images/wercker-runs-02.png)
 
 3. La construcción se completa con éxito.
 
-! [Wercker Run 03] (recursos / imágenes / wercker-runs-03.png)
+! [Wercker Run 03] (resources/images/wercker-runs-03.png)
 
 ## Configure el cluster para extraer imágenes del registro OCI
 
@@ -119,7 +119,7 @@ Para poder extraer las imágenes durante la implementación, debe configurar el 
     - Clave: `` OKE_MASTER`` (proporcionada por el instructor)
     - Clave: `` OKE_TOKEN`` (proporcionada por el instructor)
 
-! [Wercker define las variables de entorno] (resources / images / wercker-env-03.png)
+! [Wercker define las variables de entorno] (resources/images/wercker-env-03.png)
 
 5. Para revisar el script cuando se realiza un despliegue en kubernetes, cambie a GitHub y abra el archivo `` `wercker.yml```.
 
@@ -129,7 +129,7 @@ Para poder extraer las imágenes durante la implementación, debe configurar el 
     - Establezca un tiempo de espera en la implementación de 60 segundos, lo que le da al tiempo de implementación para iniciar correctamente el contenedor de la aplicación antes de que se agote el tiempo de espera.
     - Observe el estado del despliegue hasta que todos los pods hayan subido. Si se alcanza el tiempo de espera, esto devolverá inmediatamente un código de salida distinto de cero y hará que la ejecución de la tubería falle. Esto significa que su canalización tendrá éxito solo si su aplicación se ha implementado con éxito, de lo contrario falla
 
-! [Wercker Build Automatic] (recursos / imágenes / wercker-autobuild-01.png)
+! [Wercker Build Automatic] (resources/images/wercker-autobuild-01.png)
 
 ## Agregar flujo de trabajo a canalización en la aplicación Wercker
 
@@ -137,19 +137,19 @@ Para implementar el motor de contenedor OCI para Kubernetes (OKE), debe crear un
 
 1. Cambie a su aplicación Wercker y en la pestaña ** Flujos de trabajo **. Haga clic en Agregar * Nueva tubería *.
 
-! [Nuevo canal de flujo de trabajo de Wercker] (resources / images / wercker-new-pipeline.png)
+! [Nuevo canal de flujo de trabajo de Wercker] (resources/images/wercker-new-pipeline.png)
 
 2. Ingrese ** deploy-to-kubernetes ** para Nombre y Nombre de canalización YML y haga clic en ** Crear **.
 
-! [Canalización de configuración de flujo de trabajo de Wercker] (recursos / imágenes / wercker-config-pipeline.png)
+! [Canalización de configuración de flujo de trabajo de Wercker] (resources/images/wercker-config-pipeline.png)
 
 3. Haga clic en la pestaña ** Flujos de trabajo **.
 
 4. En el Editor de flujo de trabajo, haga clic en `'+'`, para crear una nueva cadena de tubería después de la construcción. Seleccione ** deploy-to-kubernetes ** para Ejecutar canalización y haga clic en ** Agregar **.
 
-! [Canalización Wecker Workflow Exec] (recursos / imágenes / wercker-exec-pipeline-config.png)
+! [Canalización Wecker Workflow Exec] (resources/images/wercker-exec-pipeline-config.png)
 
-! [Wercker Workflow Exec Pipeline Config] (recursos / images / wercker-exec-pipeline-config-02.png)
+! [Wercker Workflow Exec Pipeline Config] (resources/images/wercker-exec-pipeline-config-02.png)
 
 5. El nuevo cambio en el flujo de trabajo fue creado con éxito. En la siguiente sección, implementa la imagen OCI en kubernetes.
 
@@ -158,17 +158,17 @@ Para implementar el motor de contenedor OCI para Kubernetes (OKE), debe crear un
 1. Cambie a la pestaña ** Runs **. Haga clic en la última tubería de ** build ** para mostrar su ejecución. On ** Actions ** button Haga clic en `` `deploy-to-kubernetes```
 El canal de implementación se inicia y realiza la implementación del contenedor en OKE.
 
-! [Wercker Deploy Pipeline] (recursos / imágenes / wercker-run-deploy.png)
+! [Wercker Deploy Pipeline] (resources/images/wercker-run-deploy.png)
 
-! [Ejecución de Wercker Deploy Pipeline] (recursos / imágenes / wercker-deploy-k8s-01.png)
+! [Ejecución de Wercker Deploy Pipeline] (resources/images/wercker-deploy-k8s-01.png)
 
 2. Su despliegue se completó con éxito.
 
-! [Ejecución exitosa de Wercker Deploy Pipeline 02] (recursos / imágenes / wercker-deploy-k8s-02.png)
+! [Ejecución exitosa de Wercker Deploy Pipeline 02] (resources/images/wercker-deploy-k8s-02.png)
 
-! [Ejecución exitosa de Wercker Deploy Pipeline 03] (recursos / imágenes / wercker-deploy-k8s-03.png)
+! [Ejecución exitosa de Wercker Deploy Pipeline 03] (resources/images/wercker-deploy-k8s-03.png)
 
-! [Ejecución exitosa de Wercker Deploy Pipeline 04] (resources / images / wercker-deploy-k8s-04.png)
+! [Ejecución exitosa de Wercker Deploy Pipeline 04] (resources/images/wercker-deploy-k8s-04.png)
 
 ## Servicio de verificación en el motor de contenedores OCI para gobernadores
 
@@ -202,7 +202,7 @@ Puede verificar el servicio ejecutando la aplicación en OCI Container Engine fo
         hello-k8s-deployment-6dcbb9998b-jps7d 1/1 Running 0 8d 10.244.1.2 132.145.140.4
         quickstart-se-7bcfd74777-8rt4b 1/1 Running 0 1h 10.244.1.11 132.145.140.4
     `` `
-! [kubectl show pods] (recursos / imágenes / kubectl-pods-01.png)
+! [kubectl show pods] (resources/images/kubectl-pods-01.png)
 
     - Para averiguar el `` <port-number> ``, consulte la información acerca de ** quickstart-se **, y obtenga el puerto en el que se está ejecutando el servicio desde la columna PORT (S). Por ejemplo, el puerto 30151.
     `` `
@@ -210,14 +210,14 @@ Puede verificar el servicio ejecutando la aplicación en OCI Container Engine fo
         NOMBRE TIPO CLÚSTER-IP EXTERNO-IP PUERTO (S) EDAD
         quickstart-se NodePort 10.96.137.252 <none> 8090: 30151 / TCP 1h
     `` `
-! [kubectl muestra los detalles del servicio] (resources / images / kubectl-service-details.png)
+! [kubectl muestra los detalles del servicio] (resources/images/kubectl-service-details.png)
 
 4. Abra una nueva ventana del navegador e ingrese la URL para acceder a la aplicación ** quickstart-se ** en el campo URL del navegador. Por ejemplo, la url completa podría verse como http://132.145.140.4:31030/greet
 
     Cuando el navegador carga la página, la página muestra un mensaje como:
     `{" mensaje ":" ¡Hola mundo! "}`
 
-! [microservice running 01] (recursos / imágenes / helidon-microservice-running-02.png)
+! [microservice running 01] (resources/images/helidon-microservice-running-02.png)
 
 ## Ahora practicemos la entrega continua
 
@@ -225,21 +225,21 @@ La canalización se inicia automáticamente cuando realiza un cambio en uno de s
 
 1. Cambie a su aplicación GitHub y seleccione el archivo ** GreetService.java **.
 
-! [actualización de helidon 01] (recursos / imágenes / helidon-GreetService-java-01.png)
+! [actualización de helidon 01] (resources/images/helidon-GreetService-java-01.png)
 
 2. Edita el archivo.
 
 3. Desplázate hasta el método `` `getDefaultMessage``` y cambia la palabra" Mundo "a ** tu mensaje **. Ingrese una descripción para confirmar y haga clic en ** Confirmar cambios **.
 
-! [actualización 02 de helidon] (resources / images / helidon-GreetService-java-02.png)
+! [actualización 02 de helidon] (resources/images/helidon-GreetService-java-02.png)
 
-! [actualización 03 de helidon] (resources / images / helidon-GreetService-java-03.png)
+! [actualización 03 de helidon] (resources/images/helidon-GreetService-java-03.png)
 
 4. Su cambio fue cometido. Cambie a Wercker y haga clic en la pestaña ** Runs **.
 
     - Tenga en cuenta que la tubería se ejecutó automáticamente.
     
-    ! [actualización 04 de helidon] (resources / images / wercker-building-GreetService-01.png)
+    ! [actualización 04 de helidon] (resources/images/wercker-building-GreetService-01.png)
     
     - Una vez finalizada la compilación, se ejecuta el flujo de trabajo de despliegue
 
@@ -252,6 +252,6 @@ La canalización se inicia automáticamente cuando realiza un cambio en uno de s
     Cuando el navegador carga la página, la página muestra un mensaje como:
     `{" mensaje ":" ¡Hola Brasil! "}`
 
-! [microservice running 03] (recursos / imágenes / helidon-microservice-running-03.png)
+! [microservice running 03] (resources/images/helidon-microservice-running-03.png)
 
 ¡Felicidades! Ha implementado con éxito el microservicio ** Helidon Quick Start ** en un nodo en el nuevo clúster y ha verificado que la aplicación funciona como se esperaba.
