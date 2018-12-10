@@ -21,7 +21,7 @@ En el caso de un compromiso con el maestro, Wercker ejecuta una canalización y 
 • Cuenta Wercker
     * [Aplicación Wercker] (https://app.wercker.com) *
 
-> * [Parámetros del taller] (workshop-data.md) *
+> * [Parametros del taller] (workshop-data.md) *
 
 
 ## Aplicación Clone Helidon Microservice
