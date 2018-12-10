@@ -19,22 +19,22 @@ En el caso de un compromiso con el maestro, Wercker ejecuta una canalización y 
 • Cuenta GitHub
 
 • Cuenta Wercker
-    * [Aplicación Wercker](https://app.wercker.com) *
+    *[Aplicación Wercker](https://app.wercker.com)*
 
-> * [Parametros del taller](workshop-data.md) *
+> *[Parametros del taller](workshop-data.md)*
 
 
 ## Aplicación Clone Helidon Microservice
 
 En esta sección, creará una aplicación Wercker de una aplicación GitHub.
 
-1. Inicie sesión en su cuenta de GitHub. Abra la aplicación * [Helidon Microservice] (https://github.com/pasimoes/helidon-quickstart-se) * en Github y haga clic en ** Fork **.
+1. Inicie sesión en su cuenta de GitHub. Abra la aplicación *[Helidon Microservice](https://github.com/pasimoes/helidon-quickstart-se)* en Github y haga clic en **Fork**.
 
 ![Fork del proyecto Helidon QuickStart SE](resources/images/helidon-quickstart-se-fork.png)
 
 2. Ajuste el nombre de la aplicación en los siguientes archivos:
 
-    Donde `` `quickstart-se``` incluye tu número de participante, por ejemplo` `` quickstart-se01```
+    Donde ```quickstart-se``` incluye tu número de participante, por ejemplo ```quickstart-se01```
     - kubernetes_deployment.yml.template
     
     ![Ajustar en la plantilla de implementación de K8s] (resources/images/kubernetes-deployment-yml-template-adjust.png)
