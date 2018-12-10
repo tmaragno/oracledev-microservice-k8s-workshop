@@ -30,7 +30,7 @@ En esta sección, creará una aplicación Wercker de una aplicación GitHub.
 
 1. Inicie sesión en su cuenta de GitHub. Abra la aplicación * [Helidon Microservice] (https://github.com/pasimoes/helidon-quickstart-se) * en Github y haga clic en ** Fork **.
 
-[Fork del proyecto Helidon QuickStart SE] (resources/images/helidon-quickstart-se-fork.png)
+![Fork del proyecto Helidon QuickStart SE] (resources/images/helidon-quickstart-se-fork.png)
 
 2. Ajuste el nombre de la aplicación en los siguientes archivos:
 
