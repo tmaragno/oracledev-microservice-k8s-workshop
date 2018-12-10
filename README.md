@@ -106,3 +106,152 @@ En esta sección, creará una aplicación Wercker de una aplicación GitHub.
 ## Configure el cluster para extraer imágenes del registro OCI
 
 Para poder extraer las imágenes durante la implementación, debe configurar el clúster creando un secreto de imagen y configurando algunos parámetros adicionales en su aplicación Wercker.
+
+1. El archivo de configuración de Kubernetes hace referencia al * secreto de imagen * utilizando la variable de entorno `` OKE_IMAGESECRET``, que debe crear como una variable de entorno en su aplicación Wercker.
+
+    - Clave: `` OKE_IMAGESECRET`` (proporcionada por el instructor)
+
+2. Cambie a Wercker y haga clic en la pestaña ** Entorno **.
+
+3. Ingrese la clave `` OKE_IMAGESECRET`` y el valor `<nombre secreto>` y haga clic en ** Agregar **.
+
+4. Repita la inclusión de parámetros:
+    - Clave: `` OKE_MASTER`` (proporcionada por el instructor)
+    - Clave: `` OKE_TOKEN`` (proporcionada por el instructor)
+
+! [Wercker define las variables de entorno] (resources / images / wercker-env-03.png)
+
+5. Para revisar el script cuando se realiza un despliegue en kubernetes, cambie a GitHub y abra el archivo `` `wercker.yml```.
+
+6. Desplácese hasta el área `` `deploy-to-kubernetes```. El primer paso es que se eliminan todas las extensiones .template. Luego moverá todos los archivos de configuración de Kubernetes a un directorio limpio para que los comandos de kubectl los consuman.
+
+7. Estos pasos en el archivo de configuración hacen lo siguiente:
+    - Establezca un tiempo de espera en la implementación de 60 segundos, lo que le da al tiempo de implementación para iniciar correctamente el contenedor de la aplicación antes de que se agote el tiempo de espera.
+    - Observe el estado del despliegue hasta que todos los pods hayan subido. Si se alcanza el tiempo de espera, esto devolverá inmediatamente un código de salida distinto de cero y hará que la ejecución de la tubería falle. Esto significa que su canalización tendrá éxito solo si su aplicación se ha implementado con éxito, de lo contrario falla
+
+! [Wercker Build Automatic] (recursos / imágenes / wercker-autobuild-01.png)
+
+## Agregar flujo de trabajo a canalización en la aplicación Wercker
+
+Para implementar el motor de contenedor OCI para Kubernetes (OKE), debe crear un flujo de trabajo `` Deploy-to-Kubernetes``` en su aplicación Wercker.
+
+1. Cambie a su aplicación Wercker y en la pestaña ** Flujos de trabajo **. Haga clic en Agregar * Nueva tubería *.
+
+! [Nuevo canal de flujo de trabajo de Wercker] (resources / images / wercker-new-pipeline.png)
+
+2. Ingrese ** deploy-to-kubernetes ** para Nombre y Nombre de canalización YML y haga clic en ** Crear **.
+
+! [Canalización de configuración de flujo de trabajo de Wercker] (recursos / imágenes / wercker-config-pipeline.png)
+
+3. Haga clic en la pestaña ** Flujos de trabajo **.
+
+4. En el Editor de flujo de trabajo, haga clic en `'+'`, para crear una nueva cadena de tubería después de la construcción. Seleccione ** deploy-to-kubernetes ** para Ejecutar canalización y haga clic en ** Agregar **.
+
+! [Canalización Wecker Workflow Exec] (recursos / imágenes / wercker-exec-pipeline-config.png)
+
+! [Wercker Workflow Exec Pipeline Config] (recursos / images / wercker-exec-pipeline-config-02.png)
+
+5. El nuevo cambio en el flujo de trabajo fue creado con éxito. En la siguiente sección, implementa la imagen OCI en kubernetes.
+
+## Implementar el contenedor OCI en el motor del contenedor OCI para Kubernetes
+
+1. Cambie a la pestaña ** Runs **. Haga clic en la última tubería de ** build ** para mostrar su ejecución. On ** Actions ** button Haga clic en `` `deploy-to-kubernetes```
+El canal de implementación se inicia y realiza la implementación del contenedor en OKE.
+
+! [Wercker Deploy Pipeline] (recursos / imágenes / wercker-run-deploy.png)
+
+! [Ejecución de Wercker Deploy Pipeline] (recursos / imágenes / wercker-deploy-k8s-01.png)
+
+2. Su despliegue se completó con éxito.
+
+! [Ejecución exitosa de Wercker Deploy Pipeline 02] (recursos / imágenes / wercker-deploy-k8s-02.png)
+
+! [Ejecución exitosa de Wercker Deploy Pipeline 03] (recursos / imágenes / wercker-deploy-k8s-03.png)
+
+! [Ejecución exitosa de Wercker Deploy Pipeline 04] (resources / images / wercker-deploy-k8s-04.png)
+
+## Servicio de verificación en el motor de contenedores OCI para gobernadores
+
+Puede verificar el servicio ejecutando la aplicación en OCI Container Engine for Kubernetes.
+
+> Acceso desde la terminal nativa de contenedores en OCI.
+>
+> Para los participantes que no tienen instalado OCI Cli y Kubectl, preparamos algunos * Terminales nativos de contenedores *.
+>
+> $ ssh opc @ `` <node-address> `` -i `` <ssh-key> ``
+> [opc @ oracledev ~] $
+>
+
+
+1. Desde su ventana de terminal, ejecute lo siguiente:
+
+    `` `
+    exportar KUBECONFIG = ~ / kubeconfig
+    Kubectl obtener servicios
+    `` `
+
+
+2. Pegue el valor de EXTERNAL-IP en su navegador para ejecutar la aplicación.
+
+3. Arme la url para acceder a la aplicación helloworld, en la forma `` http: // <node-address>: <port-number> ``. Obtenga los valores de `` <node-address> `` y `` <port-number> `` en el Panel de Kubernetes de la siguiente manera:
+
+    - Para averiguar el `` <node-address> ``, consulte la información sobre el pod que ejecuta la aplicación ** quickstart-se ** y obtenga la dirección del nodo que lo ejecuta en la columna NODE. Por ejemplo, 132.145.140.4.
+    `` `
+        $ kubectl get pods --output = wide
+        NOMBRE LISTO LISTO RESTARTS EDAD NOD IP
+        hello-k8s-deployment-6dcbb9998b-jps7d 1/1 Running 0 8d 10.244.1.2 132.145.140.4
+        quickstart-se-7bcfd74777-8rt4b 1/1 Running 0 1h 10.244.1.11 132.145.140.4
+    `` `
+! [kubectl show pods] (recursos / imágenes / kubectl-pods-01.png)
+
+    - Para averiguar el `` <port-number> ``, consulte la información acerca de ** quickstart-se **, y obtenga el puerto en el que se está ejecutando el servicio desde la columna PORT (S). Por ejemplo, el puerto 30151.
+    `` `
+        $ kubectl get services quickstart-se
+        NOMBRE TIPO CLÚSTER-IP EXTERNO-IP PUERTO (S) EDAD
+        quickstart-se NodePort 10.96.137.252 <none> 8090: 30151 / TCP 1h
+    `` `
+! [kubectl muestra los detalles del servicio] (resources / images / kubectl-service-details.png)
+
+4. Abra una nueva ventana del navegador e ingrese la URL para acceder a la aplicación ** quickstart-se ** en el campo URL del navegador. Por ejemplo, la url completa podría verse como http://132.145.140.4:31030/greet
+
+    Cuando el navegador carga la página, la página muestra un mensaje como:
+    `{" mensaje ":" ¡Hola mundo! "}`
+
+! [microservice running 01] (recursos / imágenes / helidon-microservice-running-02.png)
+
+## Ahora practicemos la entrega continua
+
+La canalización se inicia automáticamente cuando realiza un cambio en uno de sus archivos de aplicación en GitHub.
+
+1. Cambie a su aplicación GitHub y seleccione el archivo ** GreetService.java **.
+
+! [actualización de helidon 01] (recursos / imágenes / helidon-GreetService-java-01.png)
+
+2. Edita el archivo.
+
+3. Desplázate hasta el método `` `getDefaultMessage``` y cambia la palabra" Mundo "a ** tu mensaje **. Ingrese una descripción para confirmar y haga clic en ** Confirmar cambios **.
+
+! [actualización 02 de helidon] (resources / images / helidon-GreetService-java-02.png)
+
+! [actualización 03 de helidon] (resources / images / helidon-GreetService-java-03.png)
+
+4. Su cambio fue cometido. Cambie a Wercker y haga clic en la pestaña ** Runs **.
+
+    - Tenga en cuenta que la tubería se ejecutó automáticamente.
+    
+    ! [actualización 04 de helidon] (resources / images / wercker-building-GreetService-01.png)
+    
+    - Una vez finalizada la compilación, se ejecuta el flujo de trabajo de despliegue
+
+5. Su despliegue completado con éxito. Haga clic en ** deploy-to-kubernetes ** para ver los detalles.
+
+    - Desplácese hasta la parte inferior para verificar que todos los pasos se completaron correctamente.
+
+6. Abra una nueva ventana del navegador e ingrese la url para acceder a la aplicación ** quickstart-se ** en el campo URL del navegador. Por ejemplo, la url completa podría verse como http://132.145.140.4:31030/greet
+
+    Cuando el navegador carga la página, la página muestra un mensaje como:
+    `{" mensaje ":" ¡Hola Brasil! "}`
+
+! [microservice running 03] (recursos / imágenes / helidon-microservice-running-03.png)
+
+¡Felicidades! Ha implementado con éxito el microservicio ** Helidon Quick Start ** en un nodo en el nuevo clúster y ha verificado que la aplicación funciona como se esperaba.
