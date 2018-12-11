@@ -9,7 +9,7 @@
 | OCIR_PASSWORD                | `>hstk3hypoNEn};A-iyW`                                   |
 | OCIR_REPO                    | `iad.ocir.io/osclad007/workshoprepo`                      |
 | OCIR_ADDR                    | `https://iad.ocir.io/v2`                        | 
-| OKE_IMAGESECRET              | `1Qu{zZNAucg)!dHo_t$-`                                         |
+| OKE_IMAGESECRET              | `oscwssecret`                                         |
 | OKE_MASTER                   | `https://ctgmnzxgzrg.us-ashburn-1.clusters.oci.oraclecloud.com:6443`                           |
 | OKE_TOKEN                    | `<oke token>`                                             |
 
